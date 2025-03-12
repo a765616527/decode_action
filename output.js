@@ -1,81 +1,54 @@
-//Sun Feb 23 2025 13:47:33 GMT+0000 (Coordinated Universal Time)
+//Wed Mar 12 2025 16:43:10 GMT+0000 (Coordinated Universal Time)
 //Base:https://github.com/echo094/decode-js
 //Modify:https://github.com/smallfawn/decode_action
 (function () {})();
-Vue.use(vant);
-new Vue({
-  "el": "#app",
-  "data": {
-    "active": 3,
-    "isLogin": false,
-    "userInfo": null,
-    "loading": true,
-    "showRechargeDialog": false,
-    "rechargeAmount": "",
-    "out_trade_no": "",
-    "showPayDialog": false
-  },
-  "created"() {
-    this.checkLogin();
-  },
-  "methods": {
-    "checkLogin"() {
-      this.loading = true;
-      axios.post("./api.php?act=checkLogin").then(_0x1e2052 => {
-        if (_0x1e2052.data.code === 1) this.isLogin = true, this.userInfo = _0x1e2052.data.data;else {
-          this.isLogin = false;
-          this.userInfo = null;
-        }
-      }).catch(_0x21c2e0 => {
-        console.error("Error:", _0x21c2e0);
-        this.isLogin = false;
-        this.userInfo = null;
-      }).finally(() => {
-        this.loading = false;
-      });
-    },
-    "onRegister"() {
-      this.$toast.loading({
-        "message": "注册中...",
-        "forbidClick": true
-      });
-      var _0x118b2d = "-----BEGIN PUBLIC KEY-----\n                    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq+HpTsb0sjtjpFIEZ3YLQ52Spb8JIJ/Rfwl3RD4aBYUKTE4/X7qc7aImeo+VbGt/o+Th+sgvMsXHj9aF122byd8KDX0z3qC3F16iRHX+Lc05HlxDYfpK87bmQ7a7SxcztxntiGVI4AjOR1B1HEq23mvsyzLq9GyOer8H4eMIzvpMsKM9lzVz8tlME2SADh2BYBQiMzydsMJx4YV3D4KARv4wTCnZZ0BtumZd8nC9kGzXCMfkRh9IUYZ/FUiCCYJUkJxbo7X+j/dnJvv4lQzeTjebLHFLvb+em5+Jx24YZzNo3SJfPEBEF2RHet8MHOAkwWfvwvXa6R2RZYIlgECE3QIDAQAB\n                    -----END PUBLIC KEY-----";
-      const _0xae927 = new JSEncrypt();
-      _0xae927.setPublicKey(_0x118b2d);
-      const _0x13570a = Math.random().toString(36).substring(2),
-        _0x102844 = new Date().getTime(),
-        _0x578671 = _0xae927.encrypt(JSON.stringify({
-          "random": _0x13570a,
-          "timestamp": _0x102844,
-          "tongxing": "sbsbsb1212"
-        }));
-      axios.post("./api.php?act=register", {
-        "data": _0x578671
-      }).then(_0x102a24 => {
-        _0x102a24.data.code === 1 ? (this.$toast.success("注册成功"), setTimeout(() => {
-          window.location.reload();
-        }, 1000)) : this.$toast.fail(_0x102a24.data.msg || "注册失败");
-      });
-    },
-    "goToPage"(_0x3075d6) {
-      window.location.href = _0x3075d6;
-    },
-    "showRecharge"() {
-      this.userInfo.zfb === "1" || this.userInfo.wx === "1" || this.userInfo.qq === "1" ? this.showRechargeDialog = true : this.$toast("请联系客服充值！");
-    },
-    "onRecharge"() {
-      if (!this.rechargeAmount || this.rechargeAmount <= 0) {
-        this.$toast("请输入正确的充值金额");
-        return;
-      }
-      axios.post("./api.php?act=cz", {
-        "money": this.rechargeAmount
-      }).then(_0x473f09 => {
-        _0x473f09.data.code === 1 ? (this.out_trade_no = _0x473f09.data.out_trade_no, this.showPayDialog = true) : this.$toast(_0x473f09.data.msg || "充值失败");
-      }).catch(_0x10a5d7 => {
-        console.error("Error:", _0x10a5d7);
-        this.$toast("系统错误，请稍后再试");
-      });
-    }
+function _0x89a5a1(_0x1eda19) {
+  const _0x2e7c50 = [1139959137, 3526905765, 1826807684, 1782758010, 236587702],
+    _0x30e485 = [1136336261, 131233397, 2378760348, 1638843734];
+  let _0x244489 = new TextEncoder().encode(_0x1eda19),
+    _0x247935 = _0x244489.length * 8;
+  _0x244489 = [..._0x244489, 128];
+  while (_0x244489.length * 8 % 512 !== 448) {
+    _0x244489.push(0);
   }
-});
+  const _0x40d3c4 = new ArrayBuffer(8);
+  new DataView(_0x40d3c4).setBigUint64(0, BigInt(_0x247935));
+  _0x244489.push(...new Uint8Array(_0x40d3c4));
+  for (let _0x20cffe = 0; _0x20cffe < _0x244489.length; _0x20cffe += 64) {
+    const _0x4b7f0a = _0x244489.slice(_0x20cffe, _0x20cffe + 64),
+      _0x115730 = new Array(80);
+    for (let _0x1d7688 = 0; _0x1d7688 < 16; _0x1d7688++) {
+      _0x115730[_0x1d7688] = _0x4b7f0a[_0x1d7688 * 4] << 24 | _0x4b7f0a[_0x1d7688 * 4 + 1] << 16 | _0x4b7f0a[_0x1d7688 * 4 + 2] << 8 | _0x4b7f0a[_0x1d7688 * 4 + 3];
+    }
+    for (let _0x4a28c0 = 16; _0x4a28c0 < 80; _0x4a28c0++) {
+      _0x115730[_0x4a28c0] = _0x309878(_0x115730[_0x4a28c0 - 3] ^ _0x115730[_0x4a28c0 - 8] ^ _0x115730[_0x4a28c0 - 14] ^ _0x115730[_0x4a28c0 - 16], 1);
+    }
+    let [_0x388ec5, _0xb3a218, _0x4de970, _0x1bef49, _0x2466f7] = _0x2e7c50;
+    for (let _0x1c91f6 = 0; _0x1c91f6 < 80; _0x1c91f6++) {
+      let _0xdab738, _0x4c98bf;
+      if (_0x1c91f6 < 20) _0xdab738 = _0xb3a218 & _0x4de970 | ~_0xb3a218 & _0x1bef49, _0x4c98bf = _0x30e485[0];else {
+        if (_0x1c91f6 < 40) _0xdab738 = _0xb3a218 ^ _0x4de970 ^ _0x1bef49, _0x4c98bf = _0x30e485[1];else {
+          if (_0x1c91f6 < 60) {
+            _0xdab738 = _0xb3a218 & _0x4de970 | _0xb3a218 & _0x1bef49 | _0x4de970 & _0x1bef49;
+            _0x4c98bf = _0x30e485[2];
+          } else _0xdab738 = _0xb3a218 ^ _0x4de970 ^ _0x1bef49, _0x4c98bf = _0x30e485[3];
+        }
+      }
+      const _0x37d2b9 = _0x309878(_0x388ec5, 5) + _0xdab738 + _0x2466f7 + _0x4c98bf + _0x115730[_0x1c91f6] >>> 0;
+      _0x2466f7 = _0x1bef49;
+      _0x1bef49 = _0x4de970;
+      _0x4de970 = _0x309878(_0xb3a218, 30);
+      _0xb3a218 = _0x388ec5;
+      _0x388ec5 = _0x37d2b9;
+    }
+    _0x2e7c50[0] = _0x2e7c50[0] + _0x388ec5 >>> 0;
+    _0x2e7c50[1] = _0x2e7c50[1] + _0xb3a218 >>> 0;
+    _0x2e7c50[2] = _0x2e7c50[2] + _0x4de970 >>> 0;
+    _0x2e7c50[3] = _0x2e7c50[3] + _0x1bef49 >>> 0;
+    _0x2e7c50[4] = _0x2e7c50[4] + _0x2466f7 >>> 0;
+  }
+  return _0x2e7c50.map(_0x53cd08 => _0x53cd08.toString(16).padStart(8, "0")).join("");
+  function _0x309878(_0x424599, _0x31c85f) {
+    return _0x424599 << _0x31c85f | _0x424599 >>> 32 - _0x31c85f;
+  }
+}
